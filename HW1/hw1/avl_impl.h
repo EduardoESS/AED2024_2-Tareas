@@ -75,6 +75,10 @@ AVLNode<T>* AVLTree<T>::leftRotate(AVLNode<T>* x) {
 template <typename T>
 AVLNode<T>* AVLTree<T>::minValueNode(AVLNode<T>* node) {
   // COMPLETE HERE
+    AVLNode<T>* current = node;
+  while (current->left != nullptr)
+    current = current->left;
+  return current;
 }
 
 // Inserción
