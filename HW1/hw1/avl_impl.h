@@ -105,7 +105,7 @@ void AVLTree<T>::postorder(AVLNode<T>* root, std::vector<T>& ret) {
 
 template <typename T>
 void AVLTree<T>::insert(T key) {
-  // COMPLETE HERE
+   root = insert(root, key);
 }
 
 template <typename T>
