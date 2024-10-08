@@ -32,7 +32,7 @@ template <typename T>
 AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
   // COMPLETE HERE
     AVLNode* x=  y->left;
-    AVLNode T2 = x-> right;
+    AVLNode* T2 = x-> right;
     // realiza la rotación
 
     x->rigth= y;
