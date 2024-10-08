@@ -61,12 +61,14 @@ template <typename T>
 AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
   if (!node) return new Node(value);
 
-  if (value < node->value)
+  if (value < node->value){
     node->left = insert(node->left, value);
-  else if (value > node->value)
+}
+  else if (value > node->value){
     node->right = insert(node->right, value);
-  else
+ } else{
     return node; // Para evitar nodos repetidos
+      }
 }
 
 // Eliminar un nodo
@@ -133,7 +135,12 @@ std::vector<T> AVLTree<T>::postorderTraversal() {
 
 template <typename T>
 int AVLTree<T>::height() {
-  // COMPLETE HERE
+  if (!root){
+      return -1;
+      }else{
+      return (root->height);
+      }
+
 }
 
 template <typename T>
