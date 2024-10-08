@@ -20,7 +20,10 @@ AVLTree<T>::AVLTree() : root(nullptr) {}
 
 template <typename T>
 int AVLTree<T>::height(AVLNode<T>* node) {
-  // COMPLETE HERE
+  if (node == nullptr){
+        return -1;
+      }
+    return (node->height);
 }
 
 template <typename T>
