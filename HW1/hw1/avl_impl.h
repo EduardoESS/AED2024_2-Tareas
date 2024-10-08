@@ -110,12 +110,12 @@ void AVLTree<T>::insert(T key) {
 
 template <typename T>
 void AVLTree<T>::remove(T key) {
-  // COMPLETE HERE
+  root = remove(root, key);
 }
 
 template <typename T>
 bool AVLTree<T>::search(T key) {
-  // COMPLETE HERE
+  return search(root, key);
 }
 
 template <typename T>
