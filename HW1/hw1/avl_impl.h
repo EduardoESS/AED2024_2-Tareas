@@ -92,7 +92,52 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
 // Eliminar un nodo
 template <typename T>
 AVLNode<T>* AVLTree<T>::remove(AVLNode<T>* root, T key) {
-  // COMPLETE HERE
+  if (root == nullptr){
+      return root;
+  }
+    if (key<root->value){
+        root->left= remove(root->left, key);
+    }
+else if (key>root->value){
+        root->right= remove(root->right, key);
+    }else{
+    if(root->left==nullptr|| root->right == nullptr ){
+        AVLNode<T>* temp= root->left=?root->left:root->right;
+        if(temp==nullptr){
+            temp=root;
+            root=nullptr;
+        }else{
+            *root=*temp;
+        }
+        delete temp;
+    }else{
+        AVLNode<T>* temp = findMin(root->right);
+        root->value=temp->value;
+        root->right=remove(root->right, temp->value);
+    }
+    }
+    if(root==nullptr){
+        return root;
+    }
+    root->height=1+std::max(height(root->left), height(root->right));
+    int balance=getBalance(root);
+    if(Balance>1 && getBalance(root->left)>=0){
+        return rotateRight(root);
+    }
+    if(balance>1&&getBalance(root->left)<0){
+        root->left=rotateLeft(root->left);
+        return rotateRight(root);
+    }
+    if(balance<-1&&getBalance(root->right)<=0){
+        return rotateLeft(root);
+    }
+    if(balance<-1&&getBalance(root->right)>0){
+        root->right=rotateRight(root->right);
+        return rotateLeft(root);
+    }
+
+    return root;
+    
 }
 
 // Búsqueda
