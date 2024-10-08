@@ -96,7 +96,18 @@ AVLNode<T>* AVLTree<T>::remove(AVLNode<T>* root, T key) {
 // Búsqueda
 template <typename T>
 bool AVLTree<T>::search(AVLNode<T>* node, T key) {
-  // COMPLETE HERE
+  if (node == nullptr){
+        return false;
+}
+    if (node->value == key){
+        return true;
+}
+     if (key < node->value){
+        return search(node->left, key);
+}else{
+    return search(node->right, key);
+         }
+    
 }
 
 // Recorrido preorder
