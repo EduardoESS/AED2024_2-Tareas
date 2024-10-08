@@ -49,6 +49,19 @@ AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
 template <typename T>
 AVLNode<T>* AVLTree<T>::leftRotate(AVLNode<T>* x) {
   // COMPLETE HERE
+    AVLNode* y = x->right;
+    AVLNode* T2 = y->left;
+
+    // Realizar la rotación
+    y->left = x;
+    x->right = T2;
+
+    // Actualizar alturas
+    x->height = max(height(x->left), height(x->right)) + 1;
+    y->height = max(height(y->left), height(y->right)) + 1;
+
+    // Retornar nueva raíz
+    return y;
 }
 
 template <typename T>
