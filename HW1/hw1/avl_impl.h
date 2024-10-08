@@ -31,6 +31,18 @@ int AVLTree<T>::getBalance(AVLNode<T>* node) {
 template <typename T>
 AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
   // COMPLETE HERE
+    AVLNode* x=  y->left;
+    AVLNode T2 = x-> right;
+    // realiza la rotación
+
+    x->rigth= y;
+    y ->left = T2;
+    //actualizar las alturas
+     y->height = std::max(height(y->left), height(y->right)) + 1;
+     x->height = std::max(height(x->left), height(x->right)) + 1;
+// ahora retornamos la raíz
+    return x;
+
 }
 
 // Rotación izquierda
