@@ -28,7 +28,7 @@ int AVLTree<T>::height(AVLNode<T>* node) {
 
 template <typename T>
 int AVLTree<T>::getBalance(AVLNode<T>* node) {
-  // COMPLETE HERE
+  
     if (node == nullptr) {
     return 0;
   }
@@ -38,7 +38,7 @@ int AVLTree<T>::getBalance(AVLNode<T>* node) {
 
 template <typename T>
 AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
-  // COMPLETE HERE
+  
     AVLNode* x=  y->left;
     AVLNode* T2 = x-> right;
     // realiza la rotación
@@ -56,7 +56,7 @@ AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
 // Rotación izquierda
 template <typename T>
 AVLNode<T>* AVLTree<T>::leftRotate(AVLNode<T>* x) {
-  // COMPLETE HERE
+ 
     AVLNode* y = x->right;
     AVLNode* T2 = y->left;
 
