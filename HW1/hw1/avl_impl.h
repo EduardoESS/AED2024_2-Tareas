@@ -59,7 +59,14 @@ AVLNode<T>* AVLTree<T>::minValueNode(AVLNode<T>* node) {
 // Inserción
 template <typename T>
 AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
-  // COMPLETE HERE
+  if (!node) return new Node(value);
+
+  if (value < node->value)
+    node->left = insert(node->left, value);
+  else if (value > node->value)
+    node->right = insert(node->right, value);
+  else
+    return node; // Para evitar nodos repetidos
 }
 
 // Eliminar un nodo
