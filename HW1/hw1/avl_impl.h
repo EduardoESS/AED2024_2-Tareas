@@ -29,6 +29,11 @@ int AVLTree<T>::height(AVLNode<T>* node) {
 template <typename T>
 int AVLTree<T>::getBalance(AVLNode<T>* node) {
   // COMPLETE HERE
+    if (node == nullptr) {
+    return 0;
+  }
+  return height(node->left) - height(node->right);
+}
 }
 
 template <typename T>
