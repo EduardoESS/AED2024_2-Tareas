@@ -203,17 +203,23 @@ bool AVLTree<T>::search(T key) {
 
 template <typename T>
 std::vector<T> AVLTree<T>::preorderTraversal() {
-  // COMPLETE HERE
+ vector<T> ret;
+  preorder(root, ret);
+  return ret;
 }
 
 template <typename T>
 std::vector<T> AVLTree<T>::inorderTraversal() {
-  // COMPLETE HERE
+  vector<T> ret;
+  inorder(root, ret);
+  return ret;
 }
 
 template <typename T>
 std::vector<T> AVLTree<T>::postorderTraversal() {
-  // COMPLETE HERE
+  vector<T> ret;
+  postorder(root, ret);
+  return ret;
 }
 
 template <typename T>
