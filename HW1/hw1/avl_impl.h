@@ -102,21 +102,21 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
     int bal = getBalance(node);
 
 
-  // Caso 1: Rotación derecha (Left Left Case)
+  // Caso 1: Rotación derecha 
   if (balance > 1 && key < node->left->data)
     return rightRotate(node);
 
-  // Caso 2: Rotación izquierda (Right Right Case)
+  // Caso 2: Rotación izquierda 
   if (balance < -1 && key > node->right->data)
     return leftRotate(node);
 
-  // Caso 3: Rotación izquierda-derecha (Left Right Case)
+  // Caso 3: Rotación izquierda-derecha 
   if (balance > 1 && key > node->left->data) {
     node->left = leftRotate(node->left);
     return rightRotate(node);
   }
 
-  // Caso 4: Rotación derecha-izquierda (Right Left Case)
+  // Caso 4: Rotación derecha-izquierda 
   if (balance < -1 && key < node->right->data) {
     node->right = rightRotate(node->right);
     return leftRotate(node);
