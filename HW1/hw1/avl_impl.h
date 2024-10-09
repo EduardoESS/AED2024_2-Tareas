@@ -42,7 +42,7 @@ AVLNode<T>* AVLTree<T>::rightRotate(AVLNode<T>* y) {
     AVLNode<T>* x=  y->left;
     AVLNode<T>* x_ = x-> right;
 
-    x->rigth= y;
+    x->right= y;
     y ->left = x_;
 
      x->height = max(height(x->left), height(x->right)) + 1;
@@ -195,7 +195,7 @@ void AVLTree<T>::preorder(AVLNode<T>* root, std::vector<T>& ret) {
   // COMPLETE HERE
   if(root!=nullptr)
   {
-    ret.push_back(root->key);
+    ret.push_back(root->data);
     preorder(root->left,ret);
     preorder(root->right,ret);
   }
@@ -207,8 +207,8 @@ void AVLTree<T>::inorder(AVLNode<T>* root, std::vector<T>& ret) {
   // COMPLETE HERE
   if(root!=nullptr)
   {
-    inorder(root->left);
-    ret.push_back(root->key);
+    inorder(root->left,ret);
+    ret.push_back(root->data);
     inorder(root->right,ret);
   }
 }
@@ -221,7 +221,7 @@ void AVLTree<T>::postorder(AVLNode<T>* root, std::vector<T>& ret) {
   {
     postorder(root->left,ret);
     postorder(root->right,ret);
-    ret.push_back(root->key);
+    ret.push_back(root->data);
   }
 }
 
