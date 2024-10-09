@@ -88,10 +88,10 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
       return new Node(value);
       }
 
-  if (value < node->value){
+  if (value < node->data){
     node->left = insert(node->left, value);
 }
-  else if (value > node->value){
+  else if (value > node->data){
     node->right = insert(node->right, value);
  } else{
     return node; // Para evitar nodos repetidos
@@ -155,10 +155,10 @@ bool AVLTree<T>::search(AVLNode<T>* node, T key) {
   if (node == nullptr){
         return false;
 }
-    if (node->value == key){
+    if (node->data == key){
         return true;
 }
-     if (key < node->value){
+     if (key < node->data){
         return search(node->left, key);
 }else{
     return search(node->right, key);
