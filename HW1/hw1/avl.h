@@ -17,6 +17,7 @@ será la interfaz pública.
 
 *******************************************************************************/
 
+#include <vector>
 template <typename T>
 struct AVLNode {
   T data;
