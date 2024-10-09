@@ -163,10 +163,10 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
 //         root->left=rotateLeft(root->left);
 //         return rotateRight(root);
 //     }
-//     if(balance<-1&&getBalance(root->right)<=0){
+//     if(balance<-1 && getBalance(root->right)<=0){
 //         return rotateLeft(root);
 //     }
-//     if(balance<-1&&getBalance(root->right)>0){
+//     if(balance<-1 && getBalance(root->right)>0){
 //         root->right=rotateRight(root->right);
 //         return rotateLeft(root);
 //     }
