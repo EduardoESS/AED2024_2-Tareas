@@ -21,7 +21,7 @@ AVLTree<T>::AVLTree() : root(nullptr) {}
 template <typename T>
 int AVLTree<T>::height(AVLNode<T>* node) {
   if (node == nullptr){
-        return -1;
+        return 0;
       }
     return (node->height);
 }
@@ -94,83 +94,83 @@ AVLNode<T>* AVLTree<T>::insert(AVLNode<T>* node, T key) {
  } else{
     return node; // no repetidos
       }
+  
+  node->height = max(height(node->left),height(node->right)) +1;
   int bal = getBalance(node);
-  node->height = max(height(node->left),height(node->right));
 
-  if(key < node->left->data && bal > 1){
-    return leftRotate(node);
+  if (bal > 1 && key < node->left->data) {
+      return rightRotate(node);
   }
-  if(key > node->right->data && bal < -1){
-    return rightRotate(node);
+
+  if (bal < -1 && key > node->right->data) {
+      return leftRotate(node);
   }
-  if(key < node->right->data && bal < -1){
-    node->right = rightRotate(node->right);
-    return leftRotate(node);
+
+  if (bal > 1 && key > node->left->data) {
+      node->left = leftRotate(node->left);
+      return rightRotate(node);
   }
-  if(key > node->left->data && bal > 1){
-    node->left = leftRotate(node->left);
-    return rightRotate(node);
+
+  if (bal < -1 && key < node->right->data) {
+      node->right = rightRotate(node->right);
+      return leftRotate(node);
   }
+
   return node;
 }
 
 // Eliminar un nodo
 template <typename T>
 AVLNode<T>* AVLTree<T>::remove(AVLNode<T>* root, T key) {
-  if (root == nullptr){
-      return root;
-  }
-    if (key<root->data){
-        root->left= remove(root->left, key);
+    if (root == nullptr) {
+        return root;
     }
-else if (key>root->data){
-        root->right= remove(root->right, key);
-    }else{
-    if(root->left==nullptr || root->right == nullptr ){
-      AVLNode<T>* nodo_;
-      if(root->left == nullptr){
-         nodo_ = root->right;
-      }
-      else{
-         nodo_ = root->left;
-      }
-        if(nodo_==nullptr){
-            nodo_=root;
-            root=nullptr;
-        }else{
-            *root=*nodo_;
+    if (key < root->data) {
+        root->left = remove(root->left, key);
+    } else if (key > root->data) {
+        root->right = remove(root->right, key);
+    } else {
+        if (root->left == nullptr || root->right == nullptr) {
+            AVLNode<T>* temp = root->left ? root->left : root->right;
+
+            if (temp == nullptr) {
+                temp = root;
+                root = nullptr;
+            } else {
+                *root = *temp;
+            }
+            delete temp;
+        } else {
+            AVLNode<T>* temp = minValueNode(root->right);
+            root->data = temp->data;
+            root->right = remove(root->right, temp->data);
         }
-        delete nodo_;
-    }else{
-        AVLNode<T>* nodo_ = minValueNode(root->right);
-        root->data=nodo_->data;
-        root->right=remove(root->right, nodo_->data);
-    }
     }
 
-    if(root==nullptr){
+    if (root == nullptr) {
         return root;
     }
 
+    root->height = max(height(root->left), height(root->right)) + 1;
     int bal = getBalance(root);
-    root->height = max(height(root->left),height(root->right));
 
-    if(key < root->left->data && bal > 1){
-      return leftRotate(root);
+    if (bal > 1 && getBalance(root->left) >= 0) {
+        return rightRotate(root);
     }
-    if(key > root->right->data && bal < -1){
-      return rightRotate(root);
+    if (bal > 1 && getBalance(root->left) < 0) {
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
     }
-    if(key < root->right->data && bal < -1){
-      root->right = rightRotate(root->right);
-      return leftRotate(root);
+    if (bal < -1 && getBalance(root->right) <= 0) {
+        return leftRotate(root);
     }
-    if(key > root->left->data && bal > 1){
-      root->left = leftRotate(root->left);
-      return rightRotate(root);
+    if (bal < -1 && getBalance(root->right) > 0) {
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
     }
     return root;
 }
+
 
 // Búsqueda
 template <typename T>
