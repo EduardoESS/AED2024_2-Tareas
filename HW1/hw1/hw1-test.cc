@@ -4,8 +4,6 @@
 #include "gtest/gtest.h"
 
 #include "hw1.h"
-#include "avl.h"
-#include "avl_impl.h"
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
