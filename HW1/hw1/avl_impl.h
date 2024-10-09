@@ -228,7 +228,25 @@ int AVLTree<T>::height() {
 
 template <typename T>
 bool AVLTree<T>::isBalanced() {
-  // COMPLETE HERE
+  return isBalanced(root);
 }
+
+
+template <typename T>
+bool AVLTree<T>::isBalanced(AVLNode<T>* node){
+if(node==nullptr){
+      return true;
+  }
+int leftHeight = height(node->left);
+    int rightHeight = height(node->right);
+
+    int bF=std::abs(rightHeight-leftHeight);
+    if(bF <=1 &&isBalanced(node->left)&&isBalanced(node->right)){
+        return true;
+    }
+    return false;
+}
+
+
 
 #endif
