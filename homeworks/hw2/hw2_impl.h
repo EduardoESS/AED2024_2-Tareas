@@ -17,8 +17,23 @@ Heap<T>::Heap(bool isMinHeap) : minHeap(isMinHeap) {
 template <typename T>
 void Heap<T>::insert(T const& element) {
   // COMPLETE HERE
+  /*
+  //Eduardo
+data.push_back(element);
+size_t i=data.size() - ;
+
+while(i>0){
+size_t parent = (i-1)/2;
+if((minHeap && data[i]<data[present]) || (!minHeap && data[i]> data[parent])){
+swap(data[i], data[parent]);
+i = parent;
+} else{
+break;
+}
+}
 }
 
+*/
 template <typename T>
 T Heap<T>::extractTop() {
   // COMPLETE HERE
@@ -47,6 +62,10 @@ bool Heap<T>::isEmpty() const {
 template <typename T>
 void Heap<T>::clear() {
   // COMPLETE HERE
+  /*
+//Eduardo
+data.clear();
+*/
 }
 
 #endif
