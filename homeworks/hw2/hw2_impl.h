@@ -49,13 +49,21 @@ T Heap<T>::peek() const {
 template <typename T>
 size_t Heap<T>::size() const {
   // COMPLETE HERE
-  return 0;
+  /*
+  //Eduardo
+  //return 0;
+  return data.size();
+  */
 }
 
 template <typename T>
 bool Heap<T>::isEmpty() const {
   // COMPLETE HERE
-  return true;
+  /*
+  //Eduardo
+  //return true;
+  return data.empty();
+  */
 }
 
 
