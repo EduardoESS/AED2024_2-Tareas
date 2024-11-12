@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <vector>
+using namespace std;
+
 
 #include "hw2.h"
 
@@ -43,7 +45,14 @@ T Heap<T>::extractTop() {
 template <typename T>
 T Heap<T>::peek() const {
   // COMPLETE HERE
-  return T{};
+  /*
+  //Eduardo
+  //return T{};
+if (data.empty()){
+throw out_of_range("Heap is empty");
+}
+return data[0];
+  */
 }
 
 template <typename T>
