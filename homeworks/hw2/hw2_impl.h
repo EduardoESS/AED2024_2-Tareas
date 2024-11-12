@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
+#include <stdexcept>
 
 
 #include "hw2.h"
@@ -18,102 +19,93 @@ Heap<T>::Heap(bool isMinHeap) : minHeap(isMinHeap) {
 
 template <typename T>
 void Heap<T>::insert(T const& element) {
-  // COMPLETE HERE
+  data.push_back(element);
+  // Balancear
+  int it = data.size() - 1;
   
-  //Eduardo
-data.push_back(element);
-size_t i=data.size() - 1;
+  bool cond;
+  if (minHeap) {
+    cond = data[it] < data[(it - 1) / 2];
+  } else {
+    cond = data[it] > data[(it - 1) / 2];
+  }
 
-while(i>0){
-size_t parent = (i-1)/2;
-if((minHeap && data[i]<data[present]) || (!minHeap && data[i]> data[parent])){
-swap(data[i], data[parent]);
-i = parent;
-} else{
-break;
+  while (it > 0 && cond) {
+    swap(data[it], data[(it - 1) / 2]);
+    it = (it - 1) / 2; 
+    if (minHeap) {
+      cond = data[it] < data[(it - 1) / 2];
+    } else {
+      cond = data[it] > data[(it - 1) / 2];
+    }
+  }
 }
-}
-}
-
 
 template <typename T>
 T Heap<T>::extractTop() {
   // COMPLETE HERE
-  
-  //Eduardo
-  //return T{};
-  if (data.empty()) {
-        cerr << "Error: Heap vacio!!!" << endl;
-        return T();  
-    }
-  T topElement = data[0];
-  data[0] = data.back();
+  T val = data[0];
+  data[0] = data[data.size()-1];
   data.pop_back();
-
-  size_t i = 0;
-  while(i<data.size()){
-    size_t left = 2*i + 1;
-    size_t right = 2*i + 2;
-    size_t swapIndex= i;
-
-    if(left < data.size() && ((minHeap && data[left] < data[swapIndex]) || (!minHeap && data[left] > data[swapIndex]))){
-            swapIndex = left;
-        }
-        if(right < data.size() && ((minHeap && data[right] < data[swapIndex]) || (!minHeap && data[right] > data[swapIndex]))){
-            swapIndex = right;
-        }
-
-        if(swapIndex==i){
-            break;
-        }
-
-        swap(data[i],data[swapIndex]);
-        i = swapIndex;
+  if(data.size() != 0){
+    int size = data.size();
+    int it = 0;
+    while(true){
+      int aux = it;
+      bool cond1;
+      if(minHeap){
+        cond1 = data[2*it + 1] < data[it];
+      }
+      else{
+        cond1 = data[2*it + 1] > data[it];
+      }
+      bool cond2;
+      if(minHeap){
+        cond2 = data[2*it + 2] < data[it];
+      }
+      else{
+        cond2 = data[2*it + 2] > data[it];
+      }
+      if(data[2*it + 1] < data.size() && cond1){
+        aux = data[2*it + 1];
+      }
+      if(data[2*it + 2] < data.size() && cond2){
+        aux = data[2*it + 2];
+      }
+      if(it == aux){
+        break;
+      }
+      swap(data[it],data[aux]);
+      it = aux;
+    }
   }
-  return topElement;
+  return val;
 }
 
 template <typename T>
 T Heap<T>::peek() const {
-  // COMPLETE HERE
-  
-  //Eduardo
-  //return T{};
-if (data.empty()){
-throw out_of_range("Heap is empty");
-}
-return data[0];
+
+  if (data.empty()){
+    throw out_of_range("No tiene elementos");
+  }
+    return data[0];
   
 }
 
 template <typename T>
 size_t Heap<T>::size() const {
-  // COMPLETE HERE
-  
-  //Eduardo
-  //return 0;
   return data.size();
-  
 }
 
 template <typename T>
 bool Heap<T>::isEmpty() const {
-  // COMPLETE HERE
-  
-  //Eduardo
-  //return true;
   return data.empty();
-  
 }
 
 
 template <typename T>
 void Heap<T>::clear() {
-  // COMPLETE HERE
-  
-//Eduardo
-data.clear();
-
+  data.clear();
 }
 
 #endif
