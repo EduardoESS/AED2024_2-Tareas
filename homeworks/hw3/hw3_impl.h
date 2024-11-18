@@ -8,9 +8,15 @@
 #include "hw3.h"
 
 template <typename T>
+BST<T>::BST() {
+    root = nullptr;  
+}
+/*
 BST<T>::BST() : root(nullptr) {
   
 }
+*/
+
 
 template <typename T>
 BST<T>::~BST() {
@@ -19,23 +25,23 @@ BST<T>::~BST() {
 
 template <typename T>
 void BST<T>::insert(T const& value) {
-  // COMPLETE HERE
+  insert(root, value);
 }
 
 template <typename T>
 bool BST<T>::search(T const& value) const {
-  // COMPLETE HERE
+  return search(root, value);
 }
 
 template <typename T>
 void BST<T>::remove(T const& value) {
-  // COMPLETE HERE
+  remove(root, value);
 }
 
 template <typename T>
 size_t BST<T>::size() const {
-  // COMPLETE HERE
-  return 0;
+  return size(root);
+  //return 0;
 }
 
 template <typename T>
@@ -50,13 +56,74 @@ T BST<T>::findMax() const {
 
 template <typename T>
 bool BST<T>::isEmpty() const {
-  // COMPLETE HERE
+  return root == nullptr;
 }
 
 template <typename T>
 void BST<T>::clear() {
-  // COMPLETE HERE
+  clear(root);
+  root = nullptr;
 }
 
+//############################ PRIVATE FUNCTIONS ###############################
+template <typename T>
+void BST<T>::insert(Node<T>*& node, T const& value) {
+    if (!node) {
+        node = new Node<T>(value); 
+    } else if (value < node->value) {
+        insert(node->left, value);  
+    } else if (value > node->value) {
+        insert(node->right, value);  
+    }
+}
+
+template <typename T>
+bool BST<T>::search(Node<T>* node, T const& value) const {
+    if (!node) return false;  
+    if (value == node->value) return true; 
+    if (value < node->value) return search(node->left, value);  
+    return search(node->right, value);  
+}
+
+template <typename T>
+void BST<T>::remove(Node<T>*& node, T const& value) {
+    if (!node) return;
+
+    if (value < node->value) {
+        remove(node->left, value);  
+    } else if (value > node->value) {
+        remove(node->right, value);  
+    } else {
+        // Nodo encontrado
+        if (!node->left) {
+            Node<T>* temp = node;
+            node = node->right;
+            delete temp;
+        } else if (!node->right) {
+            Node<T>* temp = node;
+            node = node->left;
+            delete temp;
+        } else {
+            Node<T>* minNode = findMin(node->right);
+            node->value = minNode->value;
+            remove(node->right, minNode->value);
+        }
+    }
+}
+
+template <typename T>
+size_t BST<T>::size(Node<T>* node) const {
+    if (!node) return 0;
+    return 1 + size(node->left) + size(node->right);
+}
+
+template <typename T>
+void BST<T>::clear(Node<T>*& node) {
+    if (node) {
+        clear(node->left);
+        clear(node->right);
+        delete node;
+    }
+}
 
 #endif
