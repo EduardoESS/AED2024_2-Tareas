@@ -15,6 +15,14 @@ Todas las funciones listadas en este archivo serán testeadas por el corrector
 automático, con el mismo prototipo mostrado en este archivo.
 
 *******************************************************************************/
+template <typename T>
+struct Node {
+    T value;
+    Node* left;
+    Node* right;
+
+    Node(T val) : value(val), left(nullptr), right(nullptr) {}
+};
 
 template <typename T>
 struct BST {
