@@ -8,13 +8,13 @@
 #include "hw3.h"
 
 template <typename T>
-BST<T>::BST() {
-  // COMPLETE HERE
+BST<T>::BST() : root(nullptr) {
+  
 }
 
 template <typename T>
 BST<T>::~BST() {
-  // COMPLETE HERE
+  clear();
 }
 
 template <typename T>
