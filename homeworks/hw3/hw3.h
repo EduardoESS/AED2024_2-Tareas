@@ -18,6 +18,9 @@ automático, con el mismo prototipo mostrado en este archivo.
 
 template <typename T>
 struct BST {
+
+Node<T>* root;
+
     BST();
 
     ~BST();
@@ -37,6 +40,13 @@ struct BST {
     bool isEmpty() const;
 
     void clear();
+
+private:
+    void insert(Node<T>*& node, T const& value);
+    bool search(Node<T>* node, T const& value) const;
+    void remove(Node<T>*& node, T const& value);
+    size_t size(Node<T>* node) const;
+    void clear(Node<T>*& node);
 };
 
 #include "hw3_impl.h"
