@@ -8,14 +8,10 @@
 #include "hw3.h"
 
 template <typename T>
-BST<T>::BST() {
-    root = nullptr;  
-}
-/*
 BST<T>::BST() : root(nullptr) {
   
 }
-*/
+
 
 
 template <typename T>
@@ -47,11 +43,19 @@ size_t BST<T>::size() const {
 template <typename T>
 T BST<T>::findMin() const {
   // COMPLETE HERE
+  if (isEmpty()){
+    throw std::runtime_error("BST está vacío");
+  }
+  return findMin(root)->value;
 }
 
 template <typename T>
 T BST<T>::findMax() const {
   // COMPLETE HERE
+  if (isEmpty()){
+    throw std::runtime_error("BST está vacío");
+  }
+  return findMax(root)->value;
 }
 
 template <typename T>
@@ -62,7 +66,7 @@ bool BST<T>::isEmpty() const {
 template <typename T>
 void BST<T>::clear() {
   clear(root);
-  root = nullptr;
+  root = nullptr; 
 }
 
 //############################ PRIVATE FUNCTIONS ###############################
@@ -126,4 +130,21 @@ void BST<T>::clear(Node<T>*& node) {
     }
 }
 
+template <typename T>
+Node<T>* BST<T>::findMin(Node<T>* node) const {
+    while (node && node->left) {
+        node = node->left;
+    }
+    return node;
+}
+
+
+template <typename T>
+Node<T>* BST<T>::findMax(Node<T>* node) const {
+    while (node && node->right) {
+        node = node->right;
+
+    }
+    return node;
+}
 #endif

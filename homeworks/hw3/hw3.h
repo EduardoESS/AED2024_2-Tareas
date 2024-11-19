@@ -55,6 +55,8 @@ private:
     void remove(Node<T>*& node, T const& value);
     size_t size(Node<T>* node) const;
     void clear(Node<T>*& node);
+    Node<T>* findMin(Node<T>* node) const;
+    Node<T>* findMax(Node<T>* node) const;
 };
 
 #include "hw3_impl.h"
