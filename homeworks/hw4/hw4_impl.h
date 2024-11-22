@@ -96,6 +96,8 @@ std::vector<int> stringMatch_KnuthMorrisPratt(std::string const& text,
   return ret;
 }
 
+//########################## Funciones de Ayuda #############################
+
 std::vector<int> computePrefix(std::string const& pattern) {
     size_t m = pattern.size();
     std::vector<int> prefix(m, 0);
