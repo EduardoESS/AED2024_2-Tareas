@@ -6,6 +6,30 @@
 
 #include "hw4.h"
 
+//########################## Funciones de Ayuda #############################
+
+std::vector<int> computePrefix(std::string const& pattern) {
+    size_t m = pattern.size();
+    std::vector<int> prefix(m, 0);
+    int k = 0;
+
+    for (size_t q = 1; q < m; ++q) {
+        while (k > 0 && pattern[k] != pattern[q]) {
+            k = prefix[k - 1];
+        }
+        if (pattern[k] == pattern[q]) {
+            k++;
+        }
+        prefix[q] = k;
+    }
+
+    return prefix;
+}
+
+
+
+//########################### Algoritmos HW4 ############################
+
 std::vector<int> stringMatch_naive(std::string const& text,
                                    std::string const& pattern)
 {
@@ -95,27 +119,5 @@ std::vector<int> stringMatch_KnuthMorrisPratt(std::string const& text,
     }
   return ret;
 }
-
-//########################## Funciones de Ayuda #############################
-
-std::vector<int> computePrefix(std::string const& pattern) {
-    size_t m = pattern.size();
-    std::vector<int> prefix(m, 0);
-    int k = 0;
-
-    for (size_t q = 1; q < m; ++q) {
-        while (k > 0 && pattern[k] != pattern[q]) {
-            k = prefix[k - 1];
-        }
-        if (pattern[k] == pattern[q]) {
-            k++;
-        }
-        prefix[q] = k;
-    }
-
-    return prefix;
-}
-
-
 
 #endif
