@@ -5,38 +5,42 @@
 #include <vector>
 
 #include "hw4.h"
-
+using namespace std;
 //########################## Funciones de Ayuda #############################
 
-std::vector<int> computePrefix(std::string const& pattern) {
-    size_t m = pattern.size();
-    std::vector<int> prefix(m, 0);
-    int k = 0;
+vector<int> computePrefix(string const & pattern){
 
-    for (size_t q = 1; q < m; ++q) {
-        while (k > 0 && pattern[k] != pattern[q]) {
-            k = prefix[k - 1];
-        }
-        if (pattern[k] == pattern[q]) {
-            k++;
-        }
-        prefix[q] = k;
+  size_t patLen = pattern.size();
+  vector<int> prefix(patLen, 0)
+  int patIdx = 0;
+
+  for(size_t i=1;i<patLen;i++){
+    while( patIdx > 0 && pattern[patIdx] != pattern[i]){
+      patIdx = prefix[patIdx - 1];
     }
+    if (pattern[patIdx] == pattern[i]) {
+      patIdx++;
+    }
+    prefix[i] = patIdx;
+  }
 
-    return prefix;
+  return prefix;
 }
+
+
+
 
 
 
 //########################### Algoritmos HW4 ############################
 
-std::vector<int> stringMatch_naive(std::string const& text,
-                                   std::string const& pattern)
+vector<int> stringMatch_naive(string const& text,
+                                   string const& pattern)
 {
   // Implemente aqui el método mas ingenuo para resolver el problema de string
   // matching.
 
-  std::vector<int> ret;
+  vector<int> ret;
   size_t textSize = text.size();
     size_t patternSize = pattern.size();
 
@@ -48,13 +52,13 @@ std::vector<int> stringMatch_naive(std::string const& text,
   return ret;
 }
 
-std::vector<int> stringMatch_RabinKarp(std::string const& text,
-                                       std::string const& pattern)
+vector<int> stringMatch_RabinKarp(string const& text,
+                                       string const& pattern)
 {
   // Implemente aqui el algoritmo de Rabin-Karp para resolver el problema
   // de string matching.
 
-  std::vector<int> ret;
+  vector<int> ret;
   size_t textSize = text.size();
     size_t patternSize = pattern.size();
     if (patternSize > textSize) return ret;
@@ -90,19 +94,19 @@ std::vector<int> stringMatch_RabinKarp(std::string const& text,
   return ret;
 }
 
-std::vector<int> stringMatch_KnuthMorrisPratt(std::string const& text,
-                                              std::string const& pattern)
+vector<int> stringMatch_KnuthMorrisPratt(string const& text,
+                                             string const& pattern)
 {
   // Implemente aqui el algoritmo de Knuth-Morris-Pratt para resolver el
   // problema de string matching.
 
-  std::vector<int> ret;
+  vector<int> ret;
   size_t textSize = text.size();
     size_t patternSize = pattern.size();
 
     if (patternSize == 0 || textSize < patternSize) return ret;
 
-    std::vector<int> prefix = computePrefix(pattern);
+    vector<int> prefix = computePrefix(pattern);
     int q = 0;  // Número de caracteres coincidentes
 
     for (size_t i = 0; i < textSize; ++i) {
