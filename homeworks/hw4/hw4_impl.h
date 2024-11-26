@@ -11,7 +11,7 @@ using namespace std;
 vector<int> computePrefix(string const & pattern){
 
   size_t patLen = pattern.size();
-  vector<int> prefix(patLen, 0)
+  vector<int> prefix(patLen, 0);
   int patIdx = 0;
 
   for(size_t i=1;i<patLen;i++){
