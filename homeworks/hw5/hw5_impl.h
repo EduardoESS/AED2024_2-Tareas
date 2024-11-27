@@ -3,12 +3,11 @@
 
 #include <string>
 #include <vector>
-
-#include <queue>//borrar?
-#include <stack>//borrar?
+#include <queue>
+#include <stack>
 
 #include "hw5.h"
-
+using namespace std;
 void add_edge(std::vector<std::vector<int>>& graph, int from, int to) {
   // COMPLETE AQUI
     if (from >= graph.size()) {
@@ -39,88 +38,92 @@ int n_edges(std::vector<std::vector<int>> const& graph) {
 
 std::vector<int> BFS(std::vector<std::vector<int>> const& graph, int from) {
   // COMPLETE AQUI
-  std::vector<int> ret;
-  if (from >= graph.size()) return ret;
+  vector<int> visitedNodes;
+  if (from >= graph.size()){
+    return visitedNodes;
+  } 
 
-    std::vector<bool> visited(graph.size(), false);
-    std::queue<int> q;
+    vector<bool> visited(graph.size(), false);
+    queue<int> queue;
 
     visited[from] = true;
-    q.push(from);
+    queue.push(from);
 
-    while (!q.empty()) {
-        int node = q.front();
-        q.pop();
-        ret.push_back(node);
+    while (!queue.empty()) {
+        int node = queue.front();
+        queue.pop();
+        visitedNodes.push_back(node);
 
         for (int neighbor : graph[node]) {
             if (!visited[neighbor]) {
                 visited[neighbor] = true;
-                q.push(neighbor);
+                queue.push(neighbor);
             }
         }
     }
-  return ret;
+  return visitedNodes;
 }
 
 std::vector<int> DFS(std::vector<std::vector<int>> const& graph, int from) {
   // COMPLETE AQUI
-  std::vector<int> ret;
-  if (from >= graph.size()) return ret;
+  vector<int> visitedNodes;
+  if (from >= graph.size()){ 
+    return visitedNodes;
+    }
 
-    std::vector<bool> visited(graph.size(), false);
-    std::stack<int> s;
+    vector<bool> visited(graph.size(), false);
+    stack<int> nodeStack;
+    nodeStack.push(from);
 
-    s.push(from);
-
-    while (!s.empty()) {
-        int node = s.top();
-        s.pop();
+    while (!nodeStack.empty()) {
+        int node = nodeStack.top();
+        nodeStack.pop();
 
         if (!visited[node]) {
             visited[node] = true;
-            ret.push_back(node);
+            visitedNodes.push_back(node);
 
-            for (auto it = graph[node].rbegin(); it != graph[node].rend(); ++it) {
-                if (!visited[*it]) {
-                    s.push(*it);
+            const vector<int>& neighbors = graph[node];
+            for (int i = neighbors.size() - 1; i >= 0; --i) {
+                if (!visited[neighbors[i]]) {
+                    nodeStack.push(neighbors[i]);
                 }
             }
         }
     }
-  return ret;
+  return visitedNodes;
 }
 
 std::vector<std::vector<int>> connected_components(
   std::vector<std::vector<int>> const& graph) {
   // COMPLETE AQUI
-  std::vector<std::vector<int>> ret;
-  std::vector<bool> visited(graph.size(), false);
+  vector<vector<int>> components;
+  vector<bool> visited(graph.size(), false);
 
     for (size_t i = 0; i < graph.size(); ++i) {
         if (!visited[i]) {
-            std::vector<int> component;
-            std::queue<int> q;
-            q.push(i);
+            vector<int> component;
+            queue<int> queue;
+            queue.push(i);
             visited[i] = true;
 
-            while (!q.empty()) {
-                int node = q.front();
-                q.pop();
+            while (!queue.empty()) {
+                int node = queue.front();
+                queue.pop();
                 component.push_back(node);
 
                 for (int neighbor : graph[node]) {
                     if (!visited[neighbor]) {
                         visited[neighbor] = true;
-                        q.push(neighbor);
+                        queue.push(neighbor);
                     }
                 }
             }
 
-            ret.push_back(component);
+             components.push_back(component);
         }
     }
-  return ret;
+  return  components;
 
 }
 
