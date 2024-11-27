@@ -104,7 +104,7 @@ std::vector<std::vector<int>> connected_components(
         if (!visited[i]) {
             vector<int> component;
             queue<int> nodeQueue;
-            queue.push(i);
+            nodeQueue.push(i);
             visited[i] = true;
 
             while (!nodeQueue.empty()) {
