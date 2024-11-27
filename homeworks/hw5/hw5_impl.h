@@ -103,19 +103,19 @@ std::vector<std::vector<int>> connected_components(
     for (size_t i = 0; i < graph.size(); ++i) {
         if (!visited[i]) {
             vector<int> component;
-            queue<int> queue;
+            queue<int> nodeQueue;
             queue.push(i);
             visited[i] = true;
 
-            while (!queue.empty()) {
-                int node = queue.front();
-                queue.pop();
+            while (!nodeQueue.empty()) {
+                int node = nodeQueue.front();
+                nodeQueue.pop();
                 component.push_back(node);
 
                 for (int neighbor : graph[node]) {
                     if (!visited[neighbor]) {
                         visited[neighbor] = true;
-                        queue.push(neighbor);
+                        nodeQueue.push(neighbor);
                     }
                 }
             }
